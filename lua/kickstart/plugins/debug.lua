@@ -32,7 +32,39 @@ return {
 
       -- You can provide additional configuration to the handlers,
       -- see mason-nvim-dap README for more information
-      handlers = {},
+      handlers = {
+        function(config)
+          require('mason-nvim-dap').default_setup(config)
+        end,
+        php = function(config)
+          config.configurations = {
+            {
+              type = 'php',
+              request = 'launch',
+              name = "Listen for XDebug",
+              port = 9003,
+              log = true,
+--              pathMappings = {
+--                ['/var/www/html/'] = vim.fn.getcwd() .. '/',
+--              },
+              hostname = '0.0.0.0',
+              serverSourceRoot = '/var/www/html/',
+              localSourceRoot = vim.fn.getcwd() .. '/',
+            }
+          }
+
+          config.adapters = {
+              type = 'executable',
+              command = 'node',
+              args = {"/home/amne/.local/share/nvim/mason/packages/php-debug-adapter/vscode-php-debug/out/phpDebug.js"}
+              -- you probabily want the exepath approach. I just cloned the vs extension and rebuilt it using node 16 while debugging
+              -- a DAP issue and left it like this
+              -- command = vim.fn.exepath('php-debug-adapter'),
+          }
+
+          require('mason-nvim-dap').default_setup(config) -- don't forget this!
+        end,
+      },
 
       -- You'll need to check that you have the required things installed
       -- online, please don't ask me how to install them :)
@@ -47,6 +79,10 @@ return {
     vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
     vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
     vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
+    -- F10 added after debugging DAP issue with xdebug and testing if I also had session closing issue
+    vim.keymap.set("n", '<F10>',
+                        "<cmd>lua require'dap'.disconnect({ terminateDebuggee = true })<CR><cmd>lua require'dap'.close()<CR>",
+                        {})
     vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
