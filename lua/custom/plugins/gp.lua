@@ -2,7 +2,8 @@ return {
 	"robitx/gp.nvim",
 	config = function()
                 local config = {
-                        openai_api_endpoint = "http://127.0.0.1:8000/v1/completions"
+                        openai_api_endpoint = "http://127.0.0.1:8000/v1/completions",
+                        openai_api_key = "-"
                 }
 		require("gp").setup(config)
 
