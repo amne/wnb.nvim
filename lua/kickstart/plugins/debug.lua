@@ -56,7 +56,7 @@ return {
           config.adapters = {
               type = 'executable',
               command = 'node',
-              args = {"/home/amne/.local/share/nvim/mason/packages/php-debug-adapter/vscode-php-debug/out/phpDebug.js"}
+              args = {"/home/amne/.local/share/nvim/mason/packages/php-debug-adapter/extension/out/phpDebug.js"}
               -- you probabily want the exepath approach. I just cloned the vs extension and rebuilt it using node 16 while debugging
               -- a DAP issue and left it like this
               -- command = vim.fn.exepath('php-debug-adapter'),
