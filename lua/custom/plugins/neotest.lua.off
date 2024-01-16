@@ -1,0 +1,22 @@
+return {
+  "nvim-neotest/neotest",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "antoinemadec/FixCursorHold.nvim",
+    "nvim-treesitter/nvim-treesitter",
+    "olimorris/neotest-phpunit",
+  },
+  config = function()
+    require("neotest").setup({
+      adapters = {
+        require("neotest-phpunit")
+      },
+    })
+
+    vim.keymap.set('n', '<leader>tt', function() require("neotest").run.run() end, { desc = 'Run [T]est under cursor'})
+    vim.keymap.set('n', '<leader>tf', function() require("neotest").run.run(vim.fn.expand("%")) end , { desc = 'Run [T]est File' })
+    vim.keymap.set('n', '<leader>td', function() require("neotest").run.run(vim.fn.expand("%:h")) end, { desc = 'Run [T]ests in [D]irectory' })
+    vim.keymap.set('n', '<leader>ts', function() require("neotest").run.run({ suite = true }) end, { desc = 'Run [T]est [S]uite' })
+  end
+}
+
