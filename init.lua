@@ -479,6 +479,7 @@ local on_attach = function(_, bufnr)
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', function() require('telescope.builtin').lsp_references({ path_display = { "truncate" } }) end, '[G]oto [R]eferences')
+  nmap('gR', vim.lsp.buf.references, 'List [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
