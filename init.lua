@@ -251,6 +251,7 @@ vim.o.hlsearch = false
 vim.wo.relativenumber = true
 vim.wo.number = true
 vim.o.relativenumber = true
+vim.o.scrolloff = 16
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
