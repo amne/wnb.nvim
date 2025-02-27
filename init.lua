@@ -97,6 +97,7 @@ require('lazy').setup({
 
   {
     -- Autocompletion
+
     'hrsh7th/nvim-cmp',
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
@@ -173,9 +174,9 @@ require('lazy').setup({
         section_separators = '',
       },
       tabline = {
-        lualine_a = {'buffers'},
-        lualine_b = {'branch'},
-        lualine_c = {'filename'},
+        lualine_a = {'filename'},
+        lualine_b = {},
+        lualine_c = {},
         lualine_x = {},
         lualine_y = {},
         lualine_z = {'tabs'}
@@ -590,7 +591,7 @@ cmp.setup {
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
+      select = false,
     },
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
